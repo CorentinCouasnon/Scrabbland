@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class MainMenu : MonoBehaviour
 {
@@ -21,7 +22,7 @@ public class MainMenu : MonoBehaviour
     
     public void NewGame()
     {
-        AdventureController.Instance.PlayAdventure();
+        StartCoroutine(AdventureController.Instance.PlayAdventure());
         Hide();
     }
 

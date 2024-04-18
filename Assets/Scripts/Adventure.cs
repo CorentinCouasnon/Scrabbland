@@ -2,4 +2,6 @@
 {
     public CharacterSO SelectedCharacter { get; set; }
     public DifficultySO SelectedDifficulty { get; set; }
+    
+    public Character Character { get; set; }
 }
