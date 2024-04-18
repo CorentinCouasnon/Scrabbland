@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class AdventureController : MonoBehaviour
 {
+    [SerializeField] MainMenu _mainMenu;
     [SerializeField] AdventureSelectionMenu _adventureSelectionMenu;
     [SerializeField] GameUI _gameUI;
 
@@ -23,6 +24,13 @@ public class AdventureController : MonoBehaviour
         _adventureSelectionMenu.Hide();
         Adventure.Character = new Character(Adventure.SelectedCharacter);
         _gameUI.Show();
+    }
+
+    public void QuitAdventure()
+    {
+        _gameUI.Hide();
+        Adventure = null;
+        _mainMenu.Show();
     }
 
     void OnAdventureSelected(Adventure adventure)

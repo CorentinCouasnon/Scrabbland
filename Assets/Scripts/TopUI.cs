@@ -48,11 +48,6 @@ public class TopUI : MonoBehaviour
         _character.GoldChanged -= OnGoldChanged;
     }
 
-    public void ShowOptions()
-    {
-        Debug.Log("Options...");
-    }
-
     void OnIntelligenceChanged(int oldValue, int newValue)
     {
         _characterIntelligence.text = $"{newValue}";
