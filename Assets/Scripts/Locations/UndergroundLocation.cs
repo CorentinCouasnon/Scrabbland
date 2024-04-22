@@ -1,10 +1,10 @@
-﻿public class ShopLocation : Location
+﻿public class UndergroundLocation : Location
 {
     public override void Open()
     {
         if (!CanBeSelected)
             return;
         
-        _gameUI.OpenShop();
+        _gameUI.OpenMatch();
     }
 }

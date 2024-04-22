@@ -6,6 +6,4 @@ public class Adventure
     public DifficultySO SelectedDifficulty { get; set; }
     
     public Character Character { get; set; }
-    
-    public Act Act { get; set; }
 }

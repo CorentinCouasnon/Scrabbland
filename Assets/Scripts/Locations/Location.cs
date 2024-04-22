@@ -4,8 +4,8 @@ public abstract class Location : MonoBehaviour
 {
     protected GameUI _gameUI;
 
-    [field: SerializeField] public int Weight { get; private set; }
-
+    public bool CanBeSelected { get; set; }
+    
     void Awake()
     {
         _gameUI = FindAnyObjectByType<GameUI>();

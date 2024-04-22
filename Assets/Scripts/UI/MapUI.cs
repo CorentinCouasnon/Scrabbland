@@ -1,25 +1,17 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class MapUI : MonoBehaviour
 {
-    Adventure _adventure;
-
-    void OnEnable()
-    {
-        _adventure = AdventureController.Instance.Adventure;
-        
-        if (_adventure == null)
-            return;
-
-    }
-
-    void OnDisable()
-    {
-        Clear();
-    }
+    [SerializeField] List<IslandUI> _islands;
     
-    void Clear()
+    public void ChooseIslandLayout(int islandIndex)
     {
-        _adventure = null;
+        _islands[islandIndex].SelectRandomLayout();    
+    }
+
+    public void Clear()
+    {
+        _islands.ForEach(island => island.Clear());
     }
 }
