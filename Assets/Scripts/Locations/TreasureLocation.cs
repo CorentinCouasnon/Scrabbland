@@ -1,10 +1,14 @@
-﻿public class TreasureLocation : Location
+﻿using AdventureFSM;
+
+public class TreasureLocation : Location
 {
     public override void Open()
     {
+        base.Open();
+
         if (!CanBeSelected)
             return;
         
-        _gameUI.OpenTreasure();
+        AdventureController.Instance.State = new TreasureState();
     }
 }

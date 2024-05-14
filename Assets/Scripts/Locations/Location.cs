@@ -4,6 +4,8 @@ public abstract class Location : MonoBehaviour
 {
     protected GameUI _gameUI;
 
+    [field: SerializeField] public int Step { get; private set; }
+    
     public bool CanBeSelected { get; set; }
     
     void Awake()
@@ -11,5 +13,11 @@ public abstract class Location : MonoBehaviour
         _gameUI = FindAnyObjectByType<GameUI>();
     }
 
-    public abstract void Open();
+    public virtual void Open()
+    {
+        if (!CanBeSelected)
+            return;
+        
+        AdventureController.Instance.Adventure.CurrentStep++;
+    }
 }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using AdventureFSM;
+using UnityEngine;
 
 public class MainMenu : MonoBehaviour
 {
@@ -21,7 +22,7 @@ public class MainMenu : MonoBehaviour
     
     public void NewGame()
     {
-        StartCoroutine(AdventureController.Instance.PlayAdventure());
+        AdventureController.Instance.State = new AdventureSelectionState();
         Hide();
     }
 

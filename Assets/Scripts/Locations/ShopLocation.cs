@@ -1,10 +1,14 @@
-﻿public class ShopLocation : Location
+﻿using AdventureFSM;
+
+public class ShopLocation : Location
 {
     public override void Open()
     {
+        base.Open();
+
         if (!CanBeSelected)
             return;
         
-        _gameUI.OpenShop();
+        AdventureController.Instance.State = new ShopState();
     }
 }

@@ -1,10 +1,14 @@
-﻿public class MatchLocation : Location
+﻿using AdventureFSM;
+
+public class MatchLocation : Location
 {
     public override void Open()
     {
+        base.Open();
+
         if (!CanBeSelected)
             return;
         
-        _gameUI.OpenMatch();
+        AdventureController.Instance.State = new MatchState();
     }
 }

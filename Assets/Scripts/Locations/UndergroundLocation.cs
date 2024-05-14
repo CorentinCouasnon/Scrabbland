@@ -1,10 +1,14 @@
-﻿public class UndergroundLocation : Location
+﻿using AdventureFSM;
+
+public class UndergroundLocation : Location
 {
     public override void Open()
     {
+        base.Open();
+
         if (!CanBeSelected)
             return;
         
-        _gameUI.OpenMatch();
+        AdventureController.Instance.State = new UndergroundState();
     }
 }

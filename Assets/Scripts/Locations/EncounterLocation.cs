@@ -1,10 +1,14 @@
-﻿public class EncounterLocation : Location
+﻿using AdventureFSM;
+
+public class EncounterLocation : Location
 {
     public override void Open()
     {
+        base.Open();
+        
         if (!CanBeSelected)
             return;
         
-        _gameUI.OpenEncounter();
+        AdventureController.Instance.State = new EncounterState();
     }
 }

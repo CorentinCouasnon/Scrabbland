@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using AdventureFSM;
+using UnityEngine;
 
 public class OptionsMenu : MonoBehaviour
 {
@@ -9,6 +10,6 @@ public class OptionsMenu : MonoBehaviour
 
     public void Quit()
     {
-        AdventureController.Instance.QuitAdventure();
+        AdventureController.Instance.State = new QuittingState();
     }
 }

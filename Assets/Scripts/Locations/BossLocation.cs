@@ -1,10 +1,14 @@
-﻿public class BossLocation : Location
+﻿using AdventureFSM;
+
+public class BossLocation : Location
 {
     public override void Open()
     {
+        base.Open();
+        
         if (!CanBeSelected)
             return;
-        
-        _gameUI.OpenMatch();
+
+        AdventureController.Instance.State = new BossState();
     }
 }

@@ -45,6 +45,31 @@ public class GameUI : MonoBehaviour
         _treasureContainer.SetActive(true);
     }
     
+    public void HideMap()
+    {
+        _mapContainer.SetActive(false);
+    }
+    
+    public void HideShop()
+    {
+        _shopContainer.SetActive(false);
+    }
+    
+    public void HideMatch()
+    {
+        _matchContainer.SetActive(false);
+    }
+    
+    public void HideEncounter()
+    {
+        _encounterContainer.SetActive(false);
+    }
+    
+    public void HideTreasure()
+    {
+        _treasureContainer.SetActive(false);
+    }
+    
     public void Hide()
     {
         _topContainer.SetActive(false);
