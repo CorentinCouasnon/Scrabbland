@@ -5,7 +5,6 @@ public struct Character
     int _intelligence;
     int _speed;
     int _wisdom;
-    int _handicap;
     int _gold;
     
     public CharacterSO CharacterSO { get; private set; }
@@ -52,20 +51,6 @@ public struct Character
         }
     }
 
-    public int Handicap
-    {
-        readonly get => _handicap;
-        private set
-        {
-            if (value == _handicap)
-                return;
-
-            var prev = _handicap;
-            _handicap = value;
-            HandicapChanged?.Invoke(prev, value);
-        }
-    }
-
     public int Gold
     {
         readonly get => _gold;
@@ -86,7 +71,6 @@ public struct Character
     public Action<int, int> IntelligenceChanged { get; set; }
     public Action<int, int> SpeedChanged { get; set; }
     public Action<int, int> WisdomChanged { get; set; }
-    public Action<int, int> HandicapChanged { get; set; }
     public Action<int, int> GoldChanged { get; set; }
 
     public Character(CharacterSO characterSo) : this()
@@ -95,6 +79,5 @@ public struct Character
         _intelligence = CharacterSO.BaseIntelligence;
         _speed = CharacterSO.BaseSpeed;
         _wisdom = CharacterSO.BaseWisdom;
-        _handicap = CharacterSO.BaseHandicap;
     }
 }

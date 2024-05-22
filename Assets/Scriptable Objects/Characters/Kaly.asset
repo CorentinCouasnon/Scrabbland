@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 56b4b4b90372485aadd0045c9b4d633e, type: 3}
-  m_Name: Naak
+  m_Name: Kaly
   m_EditorClassIdentifier: 
-  <Icon>k__BackingField: {fileID: 21300000, guid: 0ecd56aa1695eab489195c51c376f139, type: 3}
-  <Name>k__BackingField: Naak
-  <Description>k__BackingField: Default character.
+  <Icon>k__BackingField: {fileID: 21300000, guid: 7513ce1ad4be3a644957977fc50453a4, type: 3}
+  <Name>k__BackingField: Kaly
+  <Description>k__BackingField: 
   <BaseIntelligence>k__BackingField: 0
   <BaseSpeed>k__BackingField: 0
   <BaseWisdom>k__BackingField: 0

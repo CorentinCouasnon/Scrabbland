@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using PowerUps;
+using UnityEngine;
 
 [CreateAssetMenu]
 public class CharacterSO : ScriptableObject
@@ -10,4 +12,5 @@ public class CharacterSO : ScriptableObject
     [field: SerializeField, Range(0, 10)] public int BaseSpeed { get; private set; }
     [field: SerializeField, Range(0, 10)] public int BaseWisdom { get; private set; }
     [field: SerializeField] public int BaseHandicap { get; private set; }
+    [field: SerializeField] public List<PowerUp> BasePowerUps { get; private set; }
 }
