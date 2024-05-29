@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using MatchFSM;
+using Powerups;
 using UnityEngine;
 
 public class MatchController : MonoBehaviour
@@ -38,7 +39,9 @@ public class MatchController : MonoBehaviour
     {
         var match = new Match();
         match.Participants = new List<Participant>();
-        match.Participants.Add(new Participant(playerCharacter));
+        var participant = new Participant(playerCharacter);
+        participant.Powerups.AddRange(ProgressController.Instance.Progress.UnlockedPowerups.Where(p => p.Name != "Trash").Select(p => new Powerup(p)).OrderBy(p => p.PowerupSO.BuyCost));
+        match.Participants.Add(participant);
 
         var opponents = new List<CharacterSO>(_characters)
             .Where(character => character.Name != playerCharacter.Name)
@@ -51,5 +54,11 @@ public class MatchController : MonoBehaviour
         }
         
         return match;
+    }
+
+    [ContextMenu("Debug match state")]
+    public void Debug_MatchState()
+    {
+        Debug.Log(State);
     }
 }

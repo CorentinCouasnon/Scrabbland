@@ -19,5 +19,5 @@ MonoBehaviour:
   <BaseSpeed>k__BackingField: 0
   <BaseWisdom>k__BackingField: 0
   <BaseHandicap>k__BackingField: 250
-  <BasePowerUps>k__BackingField:
+  <BasePowerups>k__BackingField:
   - {fileID: 11400000, guid: 19ad186c4b28d6140ac466000ef52446, type: 2}

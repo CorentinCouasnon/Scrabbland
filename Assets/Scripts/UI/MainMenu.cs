@@ -4,6 +4,7 @@ using UnityEngine;
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] GameObject _container;
+    [SerializeField] KnowledgeShopUI _knowledgeShopUI;
 
     void Awake()
     {
@@ -23,6 +24,12 @@ public class MainMenu : MonoBehaviour
     public void NewGame()
     {
         AdventureController.Instance.State = new AdventureSelectionState();
+        Hide();
+    }
+    
+    public void OpenShop()
+    {
+        _knowledgeShopUI.Show();
         Hide();
     }
 

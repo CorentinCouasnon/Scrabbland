@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using PowerUps;
+using Powerups;
 using UnityEngine;
 
 [CreateAssetMenu]
@@ -12,5 +12,5 @@ public class CharacterSO : ScriptableObject
     [field: SerializeField, Range(0, 10)] public int BaseSpeed { get; private set; }
     [field: SerializeField, Range(0, 10)] public int BaseWisdom { get; private set; }
     [field: SerializeField] public int BaseHandicap { get; private set; }
-    [field: SerializeField] public List<PowerUp> BasePowerUps { get; private set; }
+    [field: SerializeField] public List<PowerupSO> BasePowerups { get; private set; }
 }

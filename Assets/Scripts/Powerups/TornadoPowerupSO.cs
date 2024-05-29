@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace PowerUps
+namespace Powerups
 {
-    [CreateAssetMenu(menuName = "Power-ups/Trash")]
-    public class TrashPowerUp : PowerUp
+    [CreateAssetMenu(menuName = "Power-ups/Tornado")]
+    public class TornadoPowerupSO : PowerupSO
     {
         public override IEnumerator Apply(Match match)
         {

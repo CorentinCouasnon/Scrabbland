@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0a92b8553874d84b282ce276a88e4b2, type: 3}
-  m_Name: Trash
+  m_Script: {fileID: 11500000, guid: 40b9245ebf374647956189cad4c01982, type: 3}
+  m_Name: Recycling
   m_EditorClassIdentifier: 
-  <Icon>k__BackingField: {fileID: 21300000, guid: 72c66a8792f57524db67c0a87f8fb4b5, type: 3}
-  <Name>k__BackingField: Trash
-  <BuyCost>k__BackingField: 0
-  <UseCost>k__BackingField: 0
+  <Icon>k__BackingField: {fileID: 21300000, guid: b0f115a73a1123a4db86eb840f9ca2ef, type: 3}
+  <Name>k__BackingField: Recycle
+  <BuyCost>k__BackingField: 10
+  <UseCost>k__BackingField: 15
   <UsageCount>k__BackingField: -1
