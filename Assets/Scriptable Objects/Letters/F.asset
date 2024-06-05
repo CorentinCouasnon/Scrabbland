@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c838eacc567c4cb3a425a31a5d996184, type: 3}
+  m_Name: F
+  m_EditorClassIdentifier: 
+  <Value>k__BackingField: 102
+  <BaseSprite>k__BackingField: {fileID: 21300000, guid: 1d5cf9dd23167b74783fa62a0e917894, type: 3}
+  <ActiveSprite>k__BackingField: {fileID: 21300000, guid: 127e1261d2684ca418098b49b5f3b943, type: 3}
+  <FixedSprite>k__BackingField: {fileID: 21300000, guid: 9adcf2a8a629f8b44b14da0d93acb02e, type: 3}
