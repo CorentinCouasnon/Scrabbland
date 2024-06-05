@@ -109,8 +109,16 @@ public class MatchUI : MonoBehaviour
 
     void OnLettersChanged(ObservableList<Letter> letters, ListChangedEventArgs<Letter> args)
     {
+        for (int i = 0; i < _letterSlots.Count; i++)
+        {
+            _letterSlots[i].Letter = null;
+        }
+        
         for (var i = 0; i < letters.Count; i++)
         {
+            if (letters[i].OnBoard)
+                continue;
+            
             _letterSlots[i].Letter = letters[i];
         }
     }
