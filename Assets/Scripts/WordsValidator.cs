@@ -22,7 +22,7 @@ public class WordsValidator : MonoBehaviour
 
     public bool IsWord(string word)
     {
-        return _trie.IsWord(_wordToFind);
+        return _trie.IsWord(word);
     }
     
     [ContextMenu("Search rack")]

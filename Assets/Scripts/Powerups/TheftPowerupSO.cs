@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Powerups
 {
     [CreateAssetMenu(menuName = "Power-ups/Theft")]
-    public class TheftrashPowerupSO : PowerupSO
+    public class TheftPowerupSO : PowerupSO
     {
         public override IEnumerator Apply(Match match)
         {

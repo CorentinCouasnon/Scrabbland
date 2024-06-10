@@ -11,6 +11,7 @@ public class BoardSlotUI : MonoBehaviour
     [SerializeField] List<LetterSO> _lettersSO;
     [SerializeField] Sprite _emptySprite;
     [SerializeField] bool _isOutsideSlot;
+    [SerializeField] bool _isCenterSlot;
 
     Letter _letter;
     bool _isLetterLocked;

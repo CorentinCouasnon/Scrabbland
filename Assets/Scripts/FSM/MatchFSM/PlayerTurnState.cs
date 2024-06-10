@@ -7,11 +7,17 @@ namespace MatchFSM
     public class PlayerTurnState : MatchState
     {
         List<LetterSlotUI> _letterSlots;
+        BoardController _boardController;
+        WordsValidator _wordsValidator;
+        ScoreCounter _scoreCounter;
         
         public override void Enter(MatchController matchController)
         {
             base.Enter(matchController);
-            
+
+            _boardController = Object.FindAnyObjectByType<BoardController>(FindObjectsInactive.Include);
+            _wordsValidator = Object.FindAnyObjectByType<WordsValidator>(FindObjectsInactive.Include);
+            _scoreCounter = Object.FindAnyObjectByType<ScoreCounter>(FindObjectsInactive.Include);
             var matchUI = Object.FindAnyObjectByType<MatchUI>(FindObjectsInactive.Include);
             _letterSlots = Object.FindObjectsByType<LetterSlotUI>(FindObjectsInactive.Include, FindObjectsSortMode.InstanceID).ToList();
             matchUI.EnablePlayerInputs();
@@ -42,7 +48,24 @@ namespace MatchFSM
 
         void OnValidated()
         {
-            
+            var words = _boardController.GetNewWords();
+
+            if (words.Any(word => !_wordsValidator.IsWord(word)))
+                return;
+
+            var score = 10;
+
+            _boardController.LockNewLetters();
+
+            var currentParticipant = MatchController.Instance.Match.GetCurrentParticipant();
+            currentParticipant.Score += score;
+            for (var i = currentParticipant.Letters.Count - 1; i >= 0; i--)
+            {
+                var letter = currentParticipant.Letters[i];
+
+                if (letter.OnBoard)
+                    currentParticipant.Letters.Remove(letter);
+            }
         }
 
         void OnEndedTurn()
