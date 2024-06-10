@@ -50,10 +50,10 @@ namespace MatchFSM
         {
             var words = _boardController.GetNewWords();
 
-            if (words.Any(word => !_wordsValidator.IsWord(word)))
+            if (words.Any(word => !_wordsValidator.IsWord(string.Join("", word.Select(l => l.Letter.Value)))))
                 return;
 
-            var score = 10;
+            var score = _scoreCounter.GetScore(words);
 
             _boardController.LockNewLetters();
 

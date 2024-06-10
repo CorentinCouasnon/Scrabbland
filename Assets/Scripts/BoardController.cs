@@ -32,29 +32,46 @@ public class BoardController : MonoBehaviour
         }
     }
     
-    public List<string> GetNewWords()
+    public List<List<BoardSlotUI>> GetNewWords()
     {
         var newSlots = _slots.Where(slot => slot.Letter != null && !slot.IsLetterLocked);
-        var words = new List<string>();
+        var words = new List<List<BoardSlotUI>>();
 
         foreach (var newSlot in newSlots)
         {
-            var horizontalPrefix = GetLetterSequence(newSlot.transform.GetSiblingIndex(), -1);
-            var verticalPrefix = GetLetterSequence(newSlot.transform.GetSiblingIndex(), -19);
-            var horizontalSuffix = GetLetterSequence(newSlot.transform.GetSiblingIndex(), 1);
-            var verticalSuffix = GetLetterSequence(newSlot.transform.GetSiblingIndex(), 19);
+            var horizontalPrefix = GetSlotSequence(newSlot.transform.GetSiblingIndex(), -1);
+            var verticalPrefix = GetSlotSequence(newSlot.transform.GetSiblingIndex(), -19);
+            var horizontalSuffix = GetSlotSequence(newSlot.transform.GetSiblingIndex(), 1);
+            var verticalSuffix = GetSlotSequence(newSlot.transform.GetSiblingIndex(), 19);
 
-            var horizontalWord = $"{horizontalPrefix}{newSlot.Letter.Value}{horizontalSuffix}";
-            var verticalWord = $"{verticalPrefix}{newSlot.Letter.Value}{verticalSuffix}";
+            var horizontalWord = new List<BoardSlotUI>();
+            horizontalWord.AddRange(horizontalPrefix);
+            horizontalWord.Add(newSlot);
+            horizontalWord.AddRange(horizontalSuffix);
             
-            if (horizontalWord.Length >= 2)
+            var verticalWord = new List<BoardSlotUI>();
+            verticalWord.AddRange(verticalPrefix);
+            verticalWord.Add(newSlot);
+            verticalWord.AddRange(verticalSuffix);
+            
+            if (horizontalWord.Count >= 2)
                 words.Add(horizontalWord);
-            if (verticalWord.Length >= 2)
+            if (verticalWord.Count >= 2)
                 words.Add(verticalWord);
         }
+        
+        var duplicateTracker = new List<List<BoardSlotUI>>();
 
-        words = words.Distinct().ToList();
+        for (var i = words.Count - 1; i >= 0; i--)
+        {
+            var word = words[i];
 
+            if (!duplicateTracker.Any(sw => sw.SequenceEqual(word)))
+                duplicateTracker.Add(word);
+            else
+                words.Remove(word);
+        }
+        
         return words;
     }
 
@@ -67,9 +84,9 @@ public class BoardController : MonoBehaviour
         });
     }
 
-    string GetLetterSequence(int start, int increment)
+    List<BoardSlotUI> GetSlotSequence(int start, int increment)
     {
-        var letters = string.Empty;
+        var letters = new List<BoardSlotUI>();
         var pointer = start;
         
         while (!IsOutOfBounds(pointer + increment))
@@ -82,9 +99,9 @@ public class BoardController : MonoBehaviour
                 break;
 
             if (increment > 0)
-                letters += slot.Letter.Value;
+                letters.Add(slot);
             else
-                letters = letters.Insert(0, $"{slot.Letter.Value}");
+                letters.Insert(0, slot);
         }
 
         return letters;

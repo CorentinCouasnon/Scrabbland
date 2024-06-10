@@ -14,7 +14,7 @@ public class ScoreCounter : MonoBehaviour
         {
             var fixedLetterCount = word.Count(slot => slot.IsLetterLocked);
             var newLetterCount = word.Count(slot => !slot.IsLetterLocked);
-
+            
             score += fixedLetterCount + newLetterCount * newLetterCount;
         }
 
