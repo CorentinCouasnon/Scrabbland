@@ -2,17 +2,16 @@
 
 public class Match
 {
-    public int _currentParticipantIndex;
+    int _currentParticipantIndex;
     
     public List<Participant> Participants { get; set; }
-    public Board Board { get; set; }
 
     public Participant GetCurrentParticipant()
     {
         return Participants[_currentParticipantIndex];
     }
 
-    public void OnTurnEnded()
+    public void SwitchCurrentParticipant()
     {
         _currentParticipantIndex++;
 

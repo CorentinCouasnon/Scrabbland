@@ -39,7 +39,7 @@ public class MatchController : MonoBehaviour
     {
         var match = new Match();
         match.Participants = new List<Participant>();
-        var participant = new Participant(playerCharacter);
+        var participant = new Participant(playerCharacter) { IsPlayer = true };
         participant.Powerups.AddRange(ProgressController.Instance.Progress.UnlockedPowerups.Where(p => p.Name != "Trash").Select(p => new Powerup(p)).OrderBy(p => p.PowerupSO.BuyCost));
         match.Participants.Add(participant);
 

@@ -10,6 +10,7 @@ public class Participant
     int _handicap;
     int _actions;
     
+    public bool IsPlayer { get; set; }
     public CharacterSO Character { get; set; }
     public ObservableList<Letter> Letters { get; set; }
     public List<Powerup> Powerups { get; set; }
@@ -39,6 +40,9 @@ public class Participant
         get => _actions;
         set
         {
+            if (value > 500)
+                value = 500;
+            
             _actions = value;
             ActionsChanged?.Invoke(_actions);
         }

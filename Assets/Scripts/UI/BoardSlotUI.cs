@@ -10,8 +10,10 @@ public class BoardSlotUI : MonoBehaviour
     [SerializeField] Button _button;
     [SerializeField] List<LetterSO> _lettersSO;
     [SerializeField] Sprite _emptySprite;
+    [SerializeField] bool _isOutsideSlot;
 
     Letter _letter;
+    bool _isLetterLocked;
 
     public Letter Letter
     {
@@ -27,12 +29,31 @@ public class BoardSlotUI : MonoBehaviour
             else
             {
                 var so = _lettersSO.Single(l => l.Value == _letter.Value);
-                _image.sprite = so.BaseSprite;
+                _image.sprite = IsLetterLocked ? so.FixedSprite : so.BaseSprite;
             }
+        } 
+    }
+    
+    public bool IsLetterLocked
+    {
+        get => _isLetterLocked;
+        set
+        {
+            _isLetterLocked = value;
+
+            if (Letter == null)
+                return;
+            
+            var so = _lettersSO.Single(l => l.Value == _letter.Value);
+            _image.sprite = _isLetterLocked ? so.FixedSprite : so.BaseSprite;
+            
+            if (_isOutsideSlot && _isLetterLocked)
+                OutsideLetterPlaced?.Invoke();
         } 
     }
 
     public static Action<BoardSlotUI> Clicked { get; set; }
+    public static Action OutsideLetterPlaced { get; set; }
 
     public void Click()
     {
