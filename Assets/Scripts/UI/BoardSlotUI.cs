@@ -52,6 +52,8 @@ public class BoardSlotUI : MonoBehaviour
                 OutsideLetterPlaced?.Invoke();
         } 
     }
+    
+    public bool IsCenterSlot => _isCenterSlot;
 
     public static Action<BoardSlotUI> Clicked { get; set; }
     public static Action OutsideLetterPlaced { get; set; }

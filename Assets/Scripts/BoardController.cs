@@ -75,12 +75,29 @@ public class BoardController : MonoBehaviour
         return words;
     }
 
+    public bool IsCenterSlotOccupied()
+    {
+        return _slots.Single(slot => slot.IsCenterSlot).Letter != null;
+    }
+
     public void ResetBoard()
     {
         _slots.ForEach(slot =>
         {
             slot.Letter = null;
             slot.IsLetterLocked = false;
+        });
+    }
+    
+    public void ClearUnselectedLetters()
+    {
+        _slots.ForEach(slot =>
+        {
+            if (slot.Letter != null && slot.IsLetterLocked == false)
+            {
+                slot.Letter.OnBoard = false;
+                slot.Letter = null;
+            }
         });
     }
 

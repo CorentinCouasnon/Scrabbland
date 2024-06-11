@@ -92,10 +92,26 @@ public class MatchUI : MonoBehaviour
         var match = MatchController.Instance.Match;
         var playerParticipant = match.Participants.Single(p => p.Character == adventure.SelectedCharacter);
         
-        playerParticipant.ActionsChanged += OnActionsChanged;
-        playerParticipant.Letters.ItemAdded += OnLettersChanged;
-        playerParticipant.Letters.ItemRemoved += OnLettersChanged;
+        playerParticipant.ActionsChanged -= OnActionsChanged;
+        playerParticipant.Letters.ItemAdded -= OnLettersChanged;
+        playerParticipant.Letters.ItemRemoved -= OnLettersChanged;
         
+        DisablePlayerInputs();
+        
+        // Letters
+        for (int i = 0; i < _letterSlots.Count; i++)
+        {
+            _letterSlots[i].IsLocked = false;
+            _letterSlots[i].Letter = null;
+        }
+        
+        // Powerups
+        for (var i = 0; i < _powerupSlots.Count; i++)
+        {
+            _powerupSlots[i].Powerup = null;
+        }
+        
+        // Leaderboard
         foreach (Transform entry in _leaderboard)
         {
             Destroy(entry.gameObject);
@@ -108,6 +124,11 @@ public class MatchUI : MonoBehaviour
     }
 
     void OnLettersChanged(ObservableList<Letter> letters, ListChangedEventArgs<Letter> args)
+    {
+        UpdateLetters(letters);
+    }
+
+    public void UpdateLetters(ObservableList<Letter> letters)
     {
         for (int i = 0; i < _letterSlots.Count; i++)
         {

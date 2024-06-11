@@ -16,6 +16,10 @@ namespace AdventureFSM
             
             _gameUI = Object.FindAnyObjectByType<GameUI>(FindObjectsInactive.Include);
             _gameUI.OpenMatch();
+            
+            // TODO: Move into MatchWinState on Leave
+            var board = Object.FindAnyObjectByType<BoardController>(FindObjectsInactive.Include);
+            board.ResetBoard();
 
             MatchController.Instance.State = new InitializingState();
             

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class PowerupSlotUI : MonoBehaviour
 {
     [SerializeField] Image _image;
+    [SerializeField] Sprite _emptySprite;
 
     Powerup _powerup;
     
@@ -14,12 +15,24 @@ public class PowerupSlotUI : MonoBehaviour
         set
         {
             _powerup = value;
-            _image.sprite = _powerup.PowerupSO.Icon;
+
+            if (_powerup == null)
+                _image.sprite = _emptySprite;
+            else
+                _image.sprite = _powerup.PowerupSO.Icon;
         } 
     }
+    
+    public bool CanBeUsed { get; set; }
 
     public void Use()
     {
+        if (!CanBeUsed)
+            return;
+        
+        if (Powerup == null)
+            return;
+        
         StartCoroutine(Powerup.Use(MatchController.Instance.Match));
     }
 }

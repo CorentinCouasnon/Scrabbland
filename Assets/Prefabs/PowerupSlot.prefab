@@ -146,3 +146,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _image: {fileID: 6594650330591881351}
+  _emptySprite: {fileID: 21300000, guid: bc416990566b91943aa5a5219a2ae212, type: 3}

@@ -6,7 +6,10 @@ namespace MatchFSM
 {
     public class PlayerTurnState : MatchState
     {
+        MatchUI _matchUI;
+        Participant _participant;
         List<LetterSlotUI> _letterSlots;
+        List<PowerupSlotUI> _powerupSlots;
         BoardController _boardController;
         WordsValidator _wordsValidator;
         ScoreCounter _scoreCounter;
@@ -15,15 +18,18 @@ namespace MatchFSM
         {
             base.Enter(matchController);
 
+            _participant = MatchController.Instance.Match.GetCurrentParticipant();
             _boardController = Object.FindAnyObjectByType<BoardController>(FindObjectsInactive.Include);
             _wordsValidator = Object.FindAnyObjectByType<WordsValidator>(FindObjectsInactive.Include);
             _scoreCounter = Object.FindAnyObjectByType<ScoreCounter>(FindObjectsInactive.Include);
-            var matchUI = Object.FindAnyObjectByType<MatchUI>(FindObjectsInactive.Include);
+            _matchUI = Object.FindAnyObjectByType<MatchUI>(FindObjectsInactive.Include);
             _letterSlots = Object.FindObjectsByType<LetterSlotUI>(FindObjectsInactive.Include, FindObjectsSortMode.InstanceID).ToList();
-            matchUI.EnablePlayerInputs();
-            matchUI.Drawn += OnDrawn;
-            matchUI.Validated += OnValidated;
-            matchUI.EndedTurn += OnEndedTurn;
+            _powerupSlots = Object.FindObjectsByType<PowerupSlotUI>(FindObjectsInactive.Include, FindObjectsSortMode.InstanceID).ToList();
+            _powerupSlots.ForEach(powerup => powerup.CanBeUsed = true);
+            _matchUI.EnablePlayerInputs();
+            _matchUI.Drawn += OnDrawn;
+            _matchUI.Validated += OnValidated;
+            _matchUI.EndedTurn += OnEndedTurn;
             LetterSlotUI.Clicked += OnLetterSlotClicked;
             BoardSlotUI.Clicked += OnBoardSlotClicked;
         }
@@ -31,23 +37,28 @@ namespace MatchFSM
         public override void Leave()
         {
             base.Leave();
-            
-            var matchUI = Object.FindAnyObjectByType<MatchUI>(FindObjectsInactive.Include);
-            matchUI.DisablePlayerInputs();
-            matchUI.Drawn -= OnDrawn;
-            matchUI.Validated -= OnValidated;
-            matchUI.EndedTurn -= OnEndedTurn;
+
+            _matchUI.DisablePlayerInputs();
+            _matchUI.Drawn -= OnDrawn;
+            _matchUI.Validated -= OnValidated;
+            _matchUI.EndedTurn -= OnEndedTurn;
+            _boardController.ClearUnselectedLetters();
+            _matchUI.UpdateLetters(_participant.Letters);
+            _powerupSlots.ForEach(powerup => powerup.CanBeUsed = false);
             LetterSlotUI.Clicked -= OnLetterSlotClicked;
             BoardSlotUI.Clicked -= OnBoardSlotClicked;
         }
 
         void OnDrawn()
         {
-            MatchController.Instance.Match.GetCurrentParticipant().Draw();
+            _participant.Draw();
         }
 
         void OnValidated()
         {
+            if (!_boardController.IsCenterSlotOccupied())
+                return;
+            
             var words = _boardController.GetNewWords();
 
             if (words.Any(word => !_wordsValidator.IsWord(string.Join("", word.Select(l => l.Letter.Value)))))
@@ -57,14 +68,13 @@ namespace MatchFSM
 
             _boardController.LockNewLetters();
 
-            var currentParticipant = MatchController.Instance.Match.GetCurrentParticipant();
-            currentParticipant.Score += score;
-            for (var i = currentParticipant.Letters.Count - 1; i >= 0; i--)
+            _participant.Score += score;
+            for (var i = _participant.Letters.Count - 1; i >= 0; i--)
             {
-                var letter = currentParticipant.Letters[i];
+                var letter = _participant.Letters[i];
 
                 if (letter.OnBoard)
-                    currentParticipant.Letters.Remove(letter);
+                    _participant.Letters.Remove(letter);
             }
         }
 
@@ -83,10 +93,13 @@ namespace MatchFSM
         
         void OnBoardSlotClicked(BoardSlotUI slot)
         {
-            // Move a letter already on board
+            // Remove board letter
             if (slot.Letter != null)
             {
-                
+                _letterSlots.ForEach(slot => slot.IsLetterSelected = false);
+                slot.Letter.OnBoard = false;
+                slot.Letter = null;
+                _matchUI.UpdateLetters(_participant.Letters);
             }
             // Place a new letter
             else
