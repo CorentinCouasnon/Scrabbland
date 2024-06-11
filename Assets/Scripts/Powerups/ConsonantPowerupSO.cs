@@ -10,7 +10,12 @@ namespace Powerups
         {
             yield return base.Apply(match);
         
-            match.GetCurrentParticipant().Letters.Clear();
+            var participant = match.GetCurrentParticipant();
+            
+            if (participant.Letters.Count == 6 + participant.Character.BaseIntelligence)
+                yield break;
+        
+            participant.Letters.Add(LetterUtils.CreateRandomConsonant());
         }
     }
 }

@@ -2,34 +2,39 @@
 
 public static class LetterUtils
 {
+    static readonly List<char> Consonants = new List<char> 
+        { 'b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'v', 'w', 'x', 'z', };
+    
+    static readonly List<char> Vowels = new List<char> { 'a', 'e', 'i', 'o', 'u', 'y', };
+    
     static readonly List<char> Letters = new List<char>
     {
-        'a',        
-        'b',        
-        'c',        
-        'd',        
-        'e',        
-        'f',        
-        'g',        
-        'h',        
-        'i',        
-        'j',        
-        'k',        
-        'l',        
-        'm',        
-        'n',        
-        'o',        
-        'p',        
-        'q',        
-        'r',        
-        's',        
-        't',        
-        'u',        
-        'v',        
-        'w',        
-        'x',        
-        'y',        
-        'z',        
+        'a',
+        'b',
+        'c',
+        'd',
+        'e',
+        'f',
+        'g',
+        'h',
+        'i',
+        'j',
+        'k',
+        'l',
+        'm',
+        'n',
+        'o',
+        'p',
+        'q',
+        'r',
+        's',
+        't',
+        'u',
+        'v',
+        'w',
+        'x',
+        'y',
+        'z',
     };
 
     static readonly Dictionary<char, int> LetterOdds = new Dictionary<char, int>
@@ -65,5 +70,15 @@ public static class LetterUtils
     public static Letter CreateRandomLetter()
     {
         return new Letter { Value = Letters.GetRandomWeighted(letter => LetterOdds[letter])};
+    }
+    
+    public static Letter CreateRandomConsonant()
+    {
+        return new Letter { Value = Consonants.GetRandom()};
+    }
+    
+    public static Letter CreateRandomVowel()
+    {
+        return new Letter { Value = Vowels.GetRandom()};
     }
 }
