@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using System.Linq;
+using DG.Tweening;
 using MatchFSM;
 using UnityEngine;
 
@@ -7,12 +8,14 @@ namespace AdventureFSM
     public class MatchState : AdventureState { 
         
         GameUI _gameUI;
+        Participant _player;
 
         public override void Enter(AdventureController adventureController)
         {
             base.Enter(adventureController);
-            
-            MatchController.Instance.Match = MatchController.Instance.CreateMatch(AdventureController.Instance.Adventure.Character.CharacterSO, 3);
+
+            var match = MatchController.Instance.CreateMatch(AdventureController.Instance.Adventure.Character.CharacterSO, 3);
+            MatchController.Instance.Match = match;
             
             _gameUI = Object.FindAnyObjectByType<GameUI>(FindObjectsInactive.Include);
             _gameUI.OpenMatch();
@@ -22,17 +25,23 @@ namespace AdventureFSM
             board.ResetBoard();
 
             MatchController.Instance.State = new InitializingState();
-            
-            var seq = DOTween.Sequence();
-            seq.AppendInterval(100f);
-            seq.OnComplete(() => { AdventureController.Instance.State = new LocationSelectionState(); });
+
+            _player = match.Participants.Single(p => p.IsPlayer);
+            _player.ScoreChanged += OnScoreChanged;
         }
         
         public override void Leave()
         {
             base.Leave();
-            
+
+            _player.ScoreChanged -= OnScoreChanged;
             _gameUI.HideMatch();
+        }
+
+        void OnScoreChanged(int newScore)
+        {
+            if (_player.Score >= _player.Handicap)
+                AdventureController.Instance.State = new LocationSelectionState();
         }
     }
 }

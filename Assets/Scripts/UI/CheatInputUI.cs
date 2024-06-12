@@ -19,6 +19,22 @@ public class CheatInputUI : MonoBehaviour
         {
             ProgressController.Instance.Progress.Quids += 2000;
         }
+        
+        if (text == "verbovirtuoso")
+        {
+            var participant = MatchController.Instance.Match?.GetCurrentParticipant();
+            
+            if (participant != null)
+                participant.Score = participant.Handicap - 1;
+        }
+        
+        if (text == "letmeplay")
+        {
+            var participant = MatchController.Instance.Match?.GetCurrentParticipant();
+            
+            if (participant != null)
+                participant.Actions += 200;
+        }
 
         _inputField.text = "";
         _inputField.gameObject.SetActive(false);

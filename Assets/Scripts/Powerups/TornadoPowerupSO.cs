@@ -9,8 +9,13 @@ namespace Powerups
         public override IEnumerator Apply(Match match)
         {
             yield return base.Apply(match);
-        
-            match.GetCurrentParticipant().Letters.Clear();
+            
+            var participant = match.GetCurrentParticipant();
+
+            for (int i = 0; i < participant.Letters.Count; i++)
+            {
+                participant.Letters[i] = LetterUtils.CreateRandomLetter();
+            }
         }
     }
 }
