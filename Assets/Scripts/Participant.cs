@@ -64,13 +64,15 @@ public class Participant
 
     public void Draw()
     {
-        if (Actions < 20 - Character.BaseSpeed)
-            return;
-
-        if (Letters.Count == 6 + Character.BaseIntelligence)
+        if (!CanDraw())
             return;
 
         Actions -= 20 - Character.BaseSpeed;
         Letters.Add(LetterUtils.CreateRandomLetter());
+    }
+
+    public bool CanDraw()
+    {
+        return Actions >= 20 - Character.BaseSpeed && Letters.Count < 6 + Character.BaseIntelligence;
     }
 }

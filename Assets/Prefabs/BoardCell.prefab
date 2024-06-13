@@ -175,3 +175,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cce039aebb61ee44b99c7327534ce36d, type: 2}
   - {fileID: 11400000, guid: a8351af025e342b4bbd653b3a6963a0d, type: 2}
   _emptySprite: {fileID: 21300000, guid: 047881e0fa02a2144a4675db64591ada, type: 3}
+  _isOutsideSlot: 0
+  _isCenterSlot: 0
+  _candidateDebugSprite: {fileID: 21300000, guid: a2a63130710b547458a55f4931838c9c, type: 3}

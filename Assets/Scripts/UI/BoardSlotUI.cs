@@ -12,6 +12,7 @@ public class BoardSlotUI : MonoBehaviour
     [SerializeField] Sprite _emptySprite;
     [SerializeField] bool _isOutsideSlot;
     [SerializeField] bool _isCenterSlot;
+    [SerializeField] Sprite _candidateDebugSprite;
 
     Letter _letter;
     bool _isLetterLocked;
@@ -54,6 +55,8 @@ public class BoardSlotUI : MonoBehaviour
     }
     
     public bool IsCenterSlot => _isCenterSlot;
+    
+    public bool IsCandidate { get; set; }
 
     public static Action<BoardSlotUI> Clicked { get; set; }
     public static Action OutsideLetterPlaced { get; set; }
@@ -61,5 +64,21 @@ public class BoardSlotUI : MonoBehaviour
     public void Click()
     {
         Clicked?.Invoke(this);
+    }
+
+    public void ShowCandidateDebug()
+    {
+        if (!IsCandidate && Letter == null)
+        {
+            _image.sprite = _candidateDebugSprite;
+        }
+    }
+
+    public void ResetCandidateDebug()
+    {
+        if (_image.sprite == _candidateDebugSprite)
+        {
+            _image.sprite = _emptySprite;
+        }
     }
 }

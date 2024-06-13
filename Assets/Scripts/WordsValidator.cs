@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class WordsValidator : MonoBehaviour
@@ -26,9 +27,9 @@ public class WordsValidator : MonoBehaviour
     }
     
     [ContextMenu("Search rack")]
-    public void Search()
+    public void Debug_Search()
     {
-        var words = _trie.Search(_rack.ToCharArray().ToList());
+        var words = Search(_rack);
 
         Debug.Log($"Words found : {words.Count}");
         
@@ -36,5 +37,10 @@ public class WordsValidator : MonoBehaviour
         {
             Debug.Log(word);
         }
+    }
+
+    public List<string> Search(string rack)
+    {
+        return _trie.Search(rack.ToUpper().ToCharArray().ToList());
     }
 }
