@@ -88,7 +88,7 @@ namespace MatchFSM
                         slot.Letter = pLetter;
                     }
                     
-                    yield return new WaitForSeconds(2f);
+                    yield return new WaitForSeconds(1f);
 
                     var newWords = boardController.GetNewWords();
                     var score = scoreCounter.GetScore(newWords);
@@ -167,7 +167,7 @@ namespace MatchFSM
                             slot.Letter = pLetter;
                         }
                         
-                        yield return new WaitForSeconds(2f);
+                        yield return new WaitForSeconds(1f);
 
                         var newWords = boardController.GetNewWords();
                         var score = scoreCounter.GetScore(newWords);
@@ -184,9 +184,9 @@ namespace MatchFSM
                     }
                 }
             }
-
-            yield return new WaitForSeconds(1f);
             
+            yield return new WaitForSeconds(3f);
+
             MatchController.Instance.State = new ChangeTurnState();
         }
     }

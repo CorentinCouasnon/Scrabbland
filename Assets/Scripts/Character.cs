@@ -1,6 +1,6 @@
 ﻿using System;
 
-public struct Character
+public class Character
 {
     int _intelligence;
     int _speed;
@@ -11,7 +11,7 @@ public struct Character
 
     public int Intelligence
     {
-        readonly get => _intelligence;
+        get => _intelligence;
         private set
         {
             if (value == _intelligence)
@@ -25,7 +25,7 @@ public struct Character
 
     public int Speed
     {
-        readonly get => _speed;
+        get => _speed;
         private set
         {
             if (value == _speed)
@@ -39,7 +39,7 @@ public struct Character
 
     public int Wisdom
     {
-        readonly get => _wisdom;
+        get => _wisdom;
         private set
         {
             if (value == _wisdom)
@@ -53,8 +53,8 @@ public struct Character
 
     public int Gold
     {
-        readonly get => _gold;
-        private set
+        get => _gold;
+        set
         {
             if (value < 0)
                 value = 0;
@@ -73,7 +73,7 @@ public struct Character
     public Action<int, int> WisdomChanged { get; set; }
     public Action<int, int> GoldChanged { get; set; }
 
-    public Character(CharacterSO characterSo) : this()
+    public Character(CharacterSO characterSo)
     {
         CharacterSO = characterSo;
         _intelligence = CharacterSO.BaseIntelligence;

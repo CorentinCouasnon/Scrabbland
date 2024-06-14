@@ -1,14 +1,16 @@
 ﻿using System.Linq;
-using DG.Tweening;
 using MatchFSM;
 using UnityEngine;
 
 namespace AdventureFSM
 {
-    public class MatchState : AdventureState { 
-        
+    public class MatchState : AdventureState
+    {
         GameUI _gameUI;
+        MatchRewardUI _matchRewardUI;
         Participant _player;
+
+        int _goldGained;
 
         public override void Enter(AdventureController adventureController)
         {
@@ -19,10 +21,6 @@ namespace AdventureFSM
             
             _gameUI = Object.FindAnyObjectByType<GameUI>(FindObjectsInactive.Include);
             _gameUI.OpenMatch();
-            
-            // TODO: Move into MatchWinState on Leave
-            var board = Object.FindAnyObjectByType<BoardController>(FindObjectsInactive.Include);
-            board.ResetBoard();
 
             MatchController.Instance.State = new InitializingState();
 
@@ -40,8 +38,55 @@ namespace AdventureFSM
 
         void OnScoreChanged(int newScore)
         {
-            if (_player.Score >= _player.Handicap)
-                AdventureController.Instance.State = new LocationSelectionState();
+            if (_player.Score < _player.Handicap)
+                return;
+            
+            var finalPosition = MatchController.Instance.Match.Participants.Count(p => p.Score >= p.Handicap);
+            _goldGained = GetGoldAmount(finalPosition);
+            
+            _matchRewardUI = Object.FindAnyObjectByType<MatchRewardUI>(FindObjectsInactive.Include);
+            _matchRewardUI.Continued += OnContinued;
+            _matchRewardUI.Show(finalPosition == 1 ? "Match win!" : "Match lost..", _goldGained);
+        }
+
+        void OnContinued()
+        {
+            AdventureController.Instance.Adventure.Character.Gold += _goldGained;
+            
+            _matchRewardUI.Continued -= OnContinued;
+            _matchRewardUI.Hide();
+            AdventureController.Instance.State = new LocationSelectionState();
+            
+            var board = Object.FindAnyObjectByType<BoardController>(FindObjectsInactive.Include);
+            board.ResetBoard();
+        }
+        
+        int GetGoldAmount(int finalPosition)
+        {
+            var baseAmount = 0;
+            var variation = 0;
+        
+            switch (finalPosition)
+            {
+                case 1:
+                    baseAmount = 90;
+                    variation = 20;
+                    break;
+                case 2:
+                    baseAmount = 60;
+                    variation = 20;
+                    break;
+                case 3:
+                    baseAmount = 30;
+                    variation = 20;
+                    break;
+                case 4:
+                    baseAmount = 10;
+                    variation = 10;
+                    break;
+            }
+        
+            return (int) (baseAmount + Random.value * variation);
         }
     }
 }
