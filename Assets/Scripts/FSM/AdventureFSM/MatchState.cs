@@ -40,8 +40,13 @@ namespace AdventureFSM
         {
             if (_player.Score < _player.Handicap)
                 return;
-            
+
+            MatchController.Instance.State = null;
+
             var finalPosition = MatchController.Instance.Match.Participants.Count(p => p.Score >= p.Handicap);
+
+            AdventureController.Instance.Adventure.TotalOpponentDefeated += 4 - finalPosition;
+            
             _goldGained = GetGoldAmount(finalPosition);
             
             _matchRewardUI = Object.FindAnyObjectByType<MatchRewardUI>(FindObjectsInactive.Include);

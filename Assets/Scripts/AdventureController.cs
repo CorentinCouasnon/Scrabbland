@@ -12,7 +12,7 @@ public class AdventureController : MonoBehaviour
         {
             _state?.Leave();
             _state = value;
-            _state.Enter(this);
+            _state?.Enter(this);
         }
     }
 

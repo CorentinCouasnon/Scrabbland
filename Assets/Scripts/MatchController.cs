@@ -7,6 +7,7 @@ using UnityEngine;
 public class MatchController : MonoBehaviour
 {
     [SerializeField] List<CharacterSO> _characters;
+    [SerializeField] CharacterSO _bossCharacter;
 
     MatchState _state;
     
@@ -17,7 +18,7 @@ public class MatchController : MonoBehaviour
         {
             _state?.Leave();
             _state = value;
-            _state.Enter(this);
+            _state?.Enter(this);
         }
     }
 
@@ -52,6 +53,18 @@ public class MatchController : MonoBehaviour
         {
             match.Participants.Add(new Participant(opponent));
         }
+        
+        return match;
+    }
+    
+    public Match CreateBossMatch(CharacterSO playerCharacter)
+    {
+        var match = new Match();
+        match.Participants = new List<Participant>();
+        var participant = new Participant(playerCharacter) { IsPlayer = true };
+        participant.Powerups.AddRange(ProgressController.Instance.Progress.UnlockedPowerups.Where(p => p.Name != "Trash").Select(p => new Powerup(p)).OrderBy(p => p.PowerupSO.BuyCost));
+        match.Participants.Add(participant);
+        match.Participants.Add(new Participant(_bossCharacter));
         
         return match;
     }
