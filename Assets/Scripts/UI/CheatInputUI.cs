@@ -20,6 +20,21 @@ public class CheatInputUI : MonoBehaviour
             ProgressController.Instance.Progress.Quids += 2000;
         }
         
+        if (text == "givemegold")
+        {
+            var adventure = AdventureController.Instance.Adventure;
+
+            if (adventure != null)
+            {
+                var character = adventure.Character;
+
+                if (character != null)
+                {
+                    character.Gold += 200;
+                }
+            }
+        }
+        
         if (text == "verbovirtuoso")
         {
             var participant = MatchController.Instance.Match?.GetCurrentParticipant();

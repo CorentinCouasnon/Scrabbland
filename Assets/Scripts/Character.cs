@@ -12,7 +12,7 @@ public class Character
     public int Intelligence
     {
         get => _intelligence;
-        private set
+        set
         {
             if (value == _intelligence)
                 return;
@@ -26,7 +26,7 @@ public class Character
     public int Speed
     {
         get => _speed;
-        private set
+        set
         {
             if (value == _speed)
                 return;
@@ -40,7 +40,7 @@ public class Character
     public int Wisdom
     {
         get => _wisdom;
-        private set
+        set
         {
             if (value == _wisdom)
                 return;

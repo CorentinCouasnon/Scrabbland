@@ -16,6 +16,10 @@ namespace AdventureFSM
             _gameUI = Object.FindAnyObjectByType<GameUI>(FindObjectsInactive.Include);
             _mapUI = Object.FindAnyObjectByType<MapUI>(FindObjectsInactive.Include);
 
+            _adventureController.Adventure.SelectedCharacter.BaseIntelligence = 0;
+            _adventureController.Adventure.SelectedCharacter.BaseWisdom = 0;
+            _adventureController.Adventure.SelectedCharacter.BaseSpeed = 0;
+            
             _gameUI.Hide();
             _mapUI.Clear();
             _adventureController.Adventure = null;

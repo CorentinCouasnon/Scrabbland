@@ -15,9 +15,9 @@ MonoBehaviour:
   <Icon>k__BackingField: {fileID: 21300000, guid: 1088d141336b1e749868204af7a8cc70, type: 3}
   <Name>k__BackingField: King
   <Description>k__BackingField: Default character.
-  <BaseIntelligence>k__BackingField: 6
-  <BaseSpeed>k__BackingField: 6
-  <BaseWisdom>k__BackingField: 5
-  <BaseHandicap>k__BackingField: 400
+  <BaseIntelligence>k__BackingField: 10
+  <BaseSpeed>k__BackingField: 10
+  <BaseWisdom>k__BackingField: 10
+  <BaseHandicap>k__BackingField: 250
   <BasePowerups>k__BackingField:
   - {fileID: 11400000, guid: 19ad186c4b28d6140ac466000ef52446, type: 2}

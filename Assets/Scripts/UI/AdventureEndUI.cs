@@ -20,8 +20,8 @@ public class AdventureEndUI : MonoBehaviour
         var actQuids = adventure.TotalActCompleted * 10;
         var opponentsQuids = adventure.TotalOpponentDefeated;
         
-        _text.text = $"{adventure.SelectedCharacter.Name}, {adventure.SelectedDifficulty.Name}";
-        _resultText.text = adventure.IsBossDefeated ? "Victory!" : "Defeat..";
+        _resultText.text = $"{adventure.SelectedCharacter.Name}, {adventure.SelectedDifficulty.Name}";
+        _text.text = adventure.IsBossDefeated ? "Victory!" : "Defeat..";
         _adventureQuidsText.text = $"King beaten : {kingQuids} <sprite=0>";
         _actQuidsText.text = $"Act completed : {actQuids} <sprite=0>";
         _opponentsQuidsText.text = $"Opponents defeated : {opponentsQuids} <sprite=0>";

@@ -44,6 +44,9 @@ public class MatchController : MonoBehaviour
         participant.Powerups.AddRange(ProgressController.Instance.Progress.UnlockedPowerups.Where(p => p.Name != "Trash").Select(p => new Powerup(p)).OrderBy(p => p.PowerupSO.BuyCost));
         match.Participants.Add(participant);
 
+        var adventureCharacter = AdventureController.Instance.Adventure.Character;
+        var traitCount = adventureCharacter.Intelligence + adventureCharacter.Wisdom + adventureCharacter.Speed;
+
         var opponents = new List<CharacterSO>(_characters)
             .Where(character => character.Name != playerCharacter.Name)
             .OrderBy(_ => Random.value)
@@ -51,6 +54,8 @@ public class MatchController : MonoBehaviour
 
         foreach (var opponent in opponents)
         {
+            var points = Random.Range(traitCount - 3, traitCount + 3);
+            opponent.AllocatePoints(Mathf.Clamp(points, 0, 30));
             match.Participants.Add(new Participant(opponent));
         }
         

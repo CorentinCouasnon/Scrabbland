@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Powerups;
+using UnityEngine;
 using UnityEngine.Rendering;
 
 public class Participant
@@ -58,7 +59,7 @@ public class Participant
         Letters = new ObservableList<Letter>();
         Powerups = character.BasePowerups.Select(powerupSO => new Powerup(powerupSO)).ToList();
         Score = 0;
-        Handicap = character.BaseHandicap;
+        Handicap = (int) (character.BaseHandicap * Mathf.Pow((float) Math.E, 0.0325f * (character.BaseWisdom + character.BaseSpeed + character.BaseIntelligence)));
         Actions = 160 + 20 * character.BaseWisdom;
     }
 
