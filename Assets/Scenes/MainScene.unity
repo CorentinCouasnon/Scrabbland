@@ -65179,6 +65179,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _encounters:
   - {fileID: 11400000, guid: cdf948bfab011614ca250381da142f6e, type: 2}
+  - {fileID: 11400000, guid: f948110aadf12c24b82e7c89254f3ebd, type: 2}
   _option1Button: {fileID: 1542823124}
   _option2Button: {fileID: 1250207946}
   _option1Text: {fileID: 1426011049}
