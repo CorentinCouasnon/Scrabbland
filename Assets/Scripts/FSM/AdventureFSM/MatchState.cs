@@ -16,7 +16,7 @@ namespace AdventureFSM
         {
             base.Enter(adventureController);
 
-            var match = MatchController.Instance.CreateMatch(AdventureController.Instance.Adventure.Character.CharacterSO, 3);
+            var match = MatchController.Instance.CreateMatch(AdventureController.Instance.Adventure.Character.CharacterSO, 3, 3, 3);
             MatchController.Instance.Match = match;
             
             _gameUI = Object.FindAnyObjectByType<GameUI>(FindObjectsInactive.Include);

@@ -36,7 +36,7 @@ public class MatchController : MonoBehaviour
         State?.Update();
     }
 
-    public Match CreateMatch(CharacterSO playerCharacter, int opponentCount)
+    public Match CreateMatch(CharacterSO playerCharacter, int opponentCount, int opponentDifficultyRangeMin, int opponentDifficultyRangeMax)
     {
         var match = new Match();
         match.Participants = new List<Participant>();
@@ -54,7 +54,7 @@ public class MatchController : MonoBehaviour
 
         foreach (var opponent in opponents)
         {
-            var points = Random.Range(traitCount - 3, traitCount + 3);
+            var points = Random.Range(traitCount - opponentDifficultyRangeMin, traitCount + opponentDifficultyRangeMax);
             opponent.AllocatePoints(Mathf.Clamp(points, 0, 30));
             match.Participants.Add(new Participant(opponent));
         }
