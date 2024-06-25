@@ -55,8 +55,8 @@ public class BoardSlotUI : MonoBehaviour
     }
     
     public bool IsCenterSlot => _isCenterSlot;
-    
-    public bool IsCandidate { get; set; }
+
+    public bool IsCandidate { get; set; } = true;
 
     public static Action<BoardSlotUI> Clicked { get; set; }
     public static Action OutsideLetterPlaced { get; set; }
