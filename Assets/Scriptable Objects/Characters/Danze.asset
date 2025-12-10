@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56b4b4b90372485aadd0045c9b4d633e, type: 3}
+  m_Name: Danze
+  m_EditorClassIdentifier: 
+  <Icon>k__BackingField: {fileID: 21300000, guid: c0b4a69d7a719b6499bcb67d94f52d4b, type: 3}
+  <Name>k__BackingField: Danze
+  <Description>k__BackingField: 
+  <BaseIntelligence>k__BackingField: 0
+  <BaseSpeed>k__BackingField: 1
+  <BaseWisdom>k__BackingField: 0
+  <BaseHandicap>k__BackingField: 250
+  <BasePowerups>k__BackingField:
+  - {fileID: 11400000, guid: 19ad186c4b28d6140ac466000ef52446, type: 2}
